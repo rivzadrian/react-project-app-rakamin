@@ -95,63 +95,63 @@ function Hero() {
   );
 }
 
-function ViewDashboard () {
- return(
-  <div className="container">
-        <div className="container text-center">
-          <div className="row">
-            <div className="col-4">
-              <div
-                className="card rounded-4 bg-primary text-light"
-                style={{ width: "100%", height: "100%" }}
-              >
-                <div className="card-body d-flex flex-column justify-content-center align-items-start ps-5">
-                  <h5 className=" h5 text-light text-start ">Account No.</h5>
-                  <h3 className="h3 text-start ">100899</h3>
-                </div>
+function ViewDashboard() {
+  return (
+    <div className="container">
+      <div className="container text-center">
+        <div className="row">
+          <div className="col-4">
+            <div
+              className="card rounded-4 bg-primary text-light"
+              style={{ width: "100%", height: "100%" }}
+            >
+              <div className="card-body d-flex flex-column justify-content-center align-items-start ps-5">
+                <h5 className=" h5 text-light text-start ">Account No.</h5>
+                <h3 className="h3 text-start ">100899</h3>
               </div>
             </div>
-            <div className="col bg-light">
-              <div
-                className="card rounded-4"
-                style={{ width: "100%", height: "100%" }}
-              >
-                <div className="card-body">
-                  <div className="row">
+          </div>
+          <div className="col bg-light">
+            <div
+              className="card rounded-4"
+              style={{ width: "100%", height: "100%" }}
+            >
+              <div className="card-body">
+                <div className="row">
                   <div className="col-9 position-relative">
-  <div className="d-flex justify-content-between align-items-center">
-    <div>
-      <h6 className="h6 card-subtitle mb-2 text-body-secondary text-start">
-        Balance
-      </h6>
-      <h3 className="h3 text-start">Rp. 10.000.000,00</h3>
-    </div>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>
+                        <h6 className="h6 card-subtitle mb-2 text-body-secondary text-start">
+                          Balance
+                        </h6>
+                        <h3 className="h3 text-start">Rp. 10.000.000,00</h3>
+                      </div>
 
-    {/* Eye Open Button */}
-    <button
-      onClick={() => alert("Plus clicked!")}
-      className="border-0 bg-transparent p-0"
-      style={{ width: "45px", height: "45px" }}
-    >
-      <img
-        src={EyeOpen}
-        alt="Eye Open"
-        style={{ width: "100%", height: "100%" }}
-      />
-    </button>
-  </div>
-</div>
-                    <div className="col d-flex justify-content-center align-items-center">
-                      <div
-                        className="position-relative"
-                        style={{ width: "40px", height: "40px" }}
+                      {/* Eye Open Button */}
+                      <button
+                        onClick={() => alert("Plus clicked!")}
+                        className="border-0 bg-transparent p-0"
+                        style={{ width: "45px", height: "45px" }}
                       >
-                        {/* Blue Box */}
-                        <button
-                          onClick={() => alert("Plus clicked!")}
-                          className="position-absolute top-50 start-50 translate-middle border-0 bg-transparent p-0"
-                          style={{ width: "20px", height: "20px" }}
-                        >
+                        <img
+                          src={EyeOpen}
+                          alt="Eye Open"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="col d-flex justify-content-center align-items-center">
+                    <div
+                      className="position-relative"
+                      style={{ width: "40px", height: "40px" }}
+                    >
+                      {/* Blue Box */}
+                      <button
+                        onClick={() => alert("Plus clicked!")}
+                        className="position-absolute top-50 start-50 translate-middle border-0 bg-transparent p-0"
+                        style={{ width: "20px", height: "20px" }}
+                      >
                         <img
                           src={BlueBox}
                           alt="BlueBox"
@@ -165,33 +165,32 @@ function ViewDashboard () {
                           className="position-absolute top-50 start-50 translate-middle"
                           style={{ width: "16px", height: "16px" }}
                         />
-                        </button>
-                      </div>
-                      <div
-                        className="position-relative"
-                        style={{ width: "40px", height: "40px" }}
+                      </button>
+                    </div>
+                    <div
+                      className="position-relative"
+                      style={{ width: "40px", height: "40px" }}
+                    >
+                      {/* Blue Box */}
+                      <button
+                        onClick={() => alert("Plus clicked!")}
+                        className="position-absolute top-50 start-50 translate-middle border-0 bg-transparent p-0"
+                        style={{ width: "20px", height: "20px" }}
                       >
-                        {/* Blue Box */}
-                        <button
-                          onClick={() => alert("Plus clicked!")}
-                          className="position-absolute top-50 start-50 translate-middle border-0 bg-transparent p-0"
-                          style={{ width: "20px", height: "20px" }}
-                        >
-                          <img
-                            src={BlueBox}
-                            alt="BlueBox"
-                            className="position-absolute top-50 start-50 translate-middle"
-                            style={{ width: "45px", height: "45px" }}
-                          />
-                          {/* Plus Sign */}
-                          <img
-                            src={Share}
-                            alt="Share"
-                            className="position-absolute top-50 start-50 translate-middle"
-                            style={{ width: "16px", height: "16px" }}
-                          />
-                        </button>
-                      </div>
+                        <img
+                          src={BlueBox}
+                          alt="BlueBox"
+                          className="position-absolute top-50 start-50 translate-middle"
+                          style={{ width: "45px", height: "45px" }}
+                        />
+                        {/* Plus Sign */}
+                        <img
+                          src={Share}
+                          alt="Share"
+                          className="position-absolute top-50 start-50 translate-middle"
+                          style={{ width: "16px", height: "16px" }}
+                        />
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -200,17 +199,101 @@ function ViewDashboard () {
           </div>
         </div>
       </div>
- )
+    </div>
+  );
 }
 
+function TransactionTable({ list }) {
+  return(
+  <div className="container">
+    <table class="table">
+      <thead>
+        <tr>
+          {/* <th scope="col">#</th> */}
+          <th scope="col">Date/Time</th>
+          <th scope="col">Type</th>
+          <th scope="col">From/To</th>
+          <th scope="col">Description</th>
+          <th scope="col">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {list.map((transactionLists) => (
+          <tr>
+            {/* <th scope="row">{transactionLists.id}</th> */}
+            <td>{transactionLists.dateTime}</td>
+            <td>{transactionLists.type}</td>
+            <td>{transactionLists.fromTo}</td>
+            <td>{transactionLists.description}</td>
+            <td>{transactionLists.amount}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  )
+}
 
 function App() {
   const [count, setCount] = useState(0);
 
-  const [todoLists, setTodoList] = useState([
-    { id: 1, message: "Eat" },
-    { id: 2, message: "Sleep" },
-    { id: 3, message: "Repeat" },
+  const [transactionList, setTransactionList] = useState([
+    {
+      id: 1,
+      dateTime: "20:10 - 30 June 2022",
+      type: "Transfer",
+      fromTo: "Sendy",
+      description: "Fore Coffee",
+      amount: "-75000",
+    },
+    {
+      id: 2,
+      dateTime: "19:52 - 29 June 2022",
+      type: "Pay",
+      fromTo: "Wallaby",
+      description: "",
+      amount: "+205000",
+    },
+    {
+      id: 3,
+      dateTime: "14:30 - 28 June 2022",
+      type: "Transfer",
+      fromTo: "Gojek",
+      description: "Food Delivery",
+      amount: "-50000",
+    },
+    {
+      id: 4,
+      dateTime: "18:15 - 27 June 2022",
+      type: "Pay",
+      fromTo: "Shopee",
+      description: "Shoes Purchase",
+      amount: "-350000",
+    },
+    {
+      id: 5,
+      dateTime: "09:20 - 27 June 2022",
+      type: "Top Up",
+      fromTo: "Bank Transfer",
+      description: "Monthly Allowance",
+      amount: "+1000000",
+    },
+    {
+      id: 6,
+      dateTime: "21:45 - 26 June 2022",
+      type: "Transfer",
+      fromTo: "Grab",
+      description: "Ride Payment",
+      amount: "-80000",
+    },
+    {
+      id: 7,
+      dateTime: "16:00 - 25 June 2022",
+      type: "Pay",
+      fromTo: "Tokopedia",
+      description: "Gadget Accessory",
+      amount: "-150000",
+    },
   ]);
 
   return (
@@ -218,27 +301,7 @@ function App() {
       <Header />
       <Hero />
       <ViewDashboard />
-      <div className="container">
-      <table class="table">
-  <thead>
-    <tr>  
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-  {todoLists.map((todoList) => (
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>))}
-  </tbody>
-</table>
-      </div>
+      <TransactionTable list={transactionList} />
     </>
   );
 }
