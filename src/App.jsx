@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlusSign from "./assets/Group 2.svg";
 import Share from "./assets/Group 3.svg";
 import BlueBox from "./assets/Rectangle 3.svg";
@@ -6,15 +6,41 @@ import EyeOpen from "/eye-open-svgrepo-com.svg";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 
+//     "user": {
+//   "name": "Chelsea Immanuela",
+//   "accountNumber": "100899",
+//   "balance": 10000000.00,
+//   "currency": "Rp"
+// },
+
+import GetService from "./services/Get.jsx";
+import { AuthProvider, useAuth } from './context/AuthContext';
+
 // import './App.css'
 
 function Header() {
+  const [error, setError] = useState('');
+  const { logout } = useAuth();
+  
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      setError('');
+  
+      const result = await logout();
+      console.log("ini logout result 1");
+      if (!result.success) {
+        setError(result.message);
+      }
+      console.log("ini logout result 2", result);
+      
+    };
+  
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            Navbar w/ text
+            Waleeeeeddddd
           </a>
           <button
             className="navbar-toggler"
@@ -45,9 +71,9 @@ function Header() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <button className="nav-link" href="#" onClick={handleSubmit}>
                   Sign Out
-                </a>
+                </button>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
@@ -62,13 +88,13 @@ function Header() {
   );
 }
 
-function Hero() {
+function Hero({ profiles }) {
   return (
     <div className="container">
       <div className="container text-center">
         <div className="row">
           <div className="col-9 bg-light text-start">
-            <h1 className="display-1">Good Morning, Chelsea</h1>
+            <h1 className="display-1">Good Morning, {profiles.name}</h1>
             <h4 className="h4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
               cumque nobis ut vel?{" "}
@@ -95,7 +121,7 @@ function Hero() {
   );
 }
 
-function ViewDashboard() {
+function ViewDashboard({ profiles }) {
   return (
     <div className="container">
       <div className="container text-center">
@@ -107,7 +133,7 @@ function ViewDashboard() {
             >
               <div className="card-body d-flex flex-column justify-content-center align-items-start ps-5">
                 <h5 className=" h5 text-light text-start ">Account No.</h5>
-                <h3 className="h3 text-start ">100899</h3>
+                <h3 className="h3 text-start ">{profiles.accountNumber}</h3>
               </div>
             </div>
           </div>
@@ -124,7 +150,9 @@ function ViewDashboard() {
                         <h6 className="h6 card-subtitle mb-2 text-body-secondary text-start">
                           Balance
                         </h6>
-                        <h3 className="h3 text-start">Rp. 10.000.000,00</h3>
+                        <h3 className="h3 text-start">
+                          {profiles.currency}. {profiles.balance}
+                        </h3>
                       </div>
 
                       {/* Eye Open Button */}
@@ -204,105 +232,172 @@ function ViewDashboard() {
 }
 
 function TransactionTable({ list }) {
-  return(
-  <div className="container">
-    <table class="table">
-      <thead>
-        <tr>
-          {/* <th scope="col">#</th> */}
-          <th scope="col">Date/Time</th>
-          <th scope="col">Type</th>
-          <th scope="col">From/To</th>
-          <th scope="col">Description</th>
-          <th scope="col">Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        {list.map((transactionLists) => (
+  return (
+    <div className="container">
+      <table class="table">
+        <thead>
           <tr>
-            {/* <th scope="row">{transactionLists.id}</th> */}
-            <td>{transactionLists.dateTime}</td>
-            <td>{transactionLists.type}</td>
-            <td>{transactionLists.fromTo}</td>
-            <td>{transactionLists.description}</td>
-            <td>{transactionLists.amount}</td>
+            {/* <th scope="col">#</th> */}
+            <th scope="col">Date/Time</th>
+            <th scope="col">Type</th>
+            <th scope="col">From/To</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-  )
+        </thead>
+        <tbody>
+          {list.map((transactionLists) => (
+            <tr>
+              {/* <th scope="row">{transactionLists.id}</th> */}
+              <td>{transactionLists.date}</td>
+              <td>{transactionLists.type}</td>
+              <td>{transactionLists.from}</td>
+              <td>{transactionLists.description}</td>
+              <td>{transactionLists.amount}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
-function App() {
-  const [count, setCount] = useState(0);
+function AppContent() {
+  const { isAuthenticated } = useAuth();
+  const [profile, setProfile] = useState([]);
+  const [transactionList, setTransactionList] = useState([]);
 
-  const [transactionList, setTransactionList] = useState([
-    {
-      id: 1,
-      dateTime: "20:10 - 30 June 2022",
-      type: "Transfer",
-      fromTo: "Sendy",
-      description: "Fore Coffee",
-      amount: "-75000",
-    },
-    {
-      id: 2,
-      dateTime: "19:52 - 29 June 2022",
-      type: "Pay",
-      fromTo: "Wallaby",
-      description: "",
-      amount: "+205000",
-    },
-    {
-      id: 3,
-      dateTime: "14:30 - 28 June 2022",
-      type: "Transfer",
-      fromTo: "Gojek",
-      description: "Food Delivery",
-      amount: "-50000",
-    },
-    {
-      id: 4,
-      dateTime: "18:15 - 27 June 2022",
-      type: "Pay",
-      fromTo: "Shopee",
-      description: "Shoes Purchase",
-      amount: "-350000",
-    },
-    {
-      id: 5,
-      dateTime: "09:20 - 27 June 2022",
-      type: "Top Up",
-      fromTo: "Bank Transfer",
-      description: "Monthly Allowance",
-      amount: "+1000000",
-    },
-    {
-      id: 6,
-      dateTime: "21:45 - 26 June 2022",
-      type: "Transfer",
-      fromTo: "Grab",
-      description: "Ride Payment",
-      amount: "-80000",
-    },
-    {
-      id: 7,
-      dateTime: "16:00 - 25 June 2022",
-      type: "Pay",
-      fromTo: "Tokopedia",
-      description: "Gadget Accessory",
-      amount: "-150000",
-    },
-  ]);
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        let userData = await GetService.GetProfile();
+        setProfile(userData);
+      } catch (error) {
+        console.log("Error fetching profile:", error);
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  useEffect(() => {
+    const fetchTransaction = async () => {
+      try {
+        let userTrans = await GetService.GetTransaction();
+        setTransactionList(userTrans);
+      } catch (error) {
+        console.log("Error fetching transaction:", error);
+      }
+    };
+    fetchTransaction();
+  }, []);
+
+  const LoginForm = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const { login } = useAuth();
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setError('');
+
+      const result = await login(username, password);
+      if (!result.success) {
+        setError(result.message);
+      }
+    };
+
+    return (
+      <div className="login-container">
+        <h2>Login</h2>
+        {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Username</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    );
+  };
+
+  if (!isAuthenticated) {
+    return <LoginForm />;
+  }
 
   return (
     <>
       <Header />
-      <Hero />
-      <ViewDashboard />
+      <Hero profiles={profile} />
+      <ViewDashboard profiles={profile} />
+      <div className="container py-4">
+        <div className="row g-2 align-items-center">
+          <div className="col-md-3">
+            <div className="input-group">
+              <span className="input-group-text">
+                <i className="bi bi-search"></i>
+              </span>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search"
+              />
+            </div>
+          </div>
+
+          <div className="col-md-2"></div>
+
+          <div className="col-md-2">
+            <label className="form-label me-2">Show</label>
+            <select className="form-select">
+              <option>Last 10 transactions</option>
+              <option>Last 20 transactions</option>
+              <option>All transactions</option>
+            </select>
+          </div>
+
+          <div className="col-md-3">
+            <label className="form-label">Sort by</label>
+            <select className="form-select">
+              <option>Date</option>
+              <option>Amount</option>
+            </select>
+          </div>
+
+          <div className="col-md-2">
+            <label className="form-label d-none d-md-block">&nbsp;</label>
+            <select className="form-select">
+              <option>Descending</option>
+              <option>Ascending</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <TransactionTable list={transactionList} />
     </>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 
